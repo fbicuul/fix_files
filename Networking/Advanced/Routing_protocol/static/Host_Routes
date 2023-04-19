@@ -1,0 +1,31 @@
+
+Three ways a host route can be added to the routing table:
+
+• Automatically installed when an IP address is configured on the router (as shown in the figures)
+• Configured as a static host route
+• Host route automatically obtained through other methods (OSPF)
+
+
+
+
+Automatically Installed Host Routes
+Cisco IOS automatically installs a host route, also known as a local  host route, when an interface address is configured on the router. A  host route allows for a more efficient process for packets that are  directed to the router itself, rather than for packet forwarding. This  is in addition to the connected route, designated with a C in the routing table for the network address of the interface.
+When  an active interface on a router is configured with an IP address, a  local host route is automatically added to the routing table. The local  routes are marked with L in the output of the routing table
+
+
+
+
+Static Host Routes
+A host route can be a manually configured static route to direct traffic to a specific destination device, such as the server shown in the figure. The static route uses a destination IP address and a 255.255.255.255 (/32) mask for IPv4 host routes, and a /128 prefix length for IPv6 host routes.
+
+Branch(config)# ip route 		209.165.200.238 	255.255.255.255 	198.51.100.2
+Branch(config)# ipv6 route 	2001:db8:acad:2::238/128 	2001:db8:acad:1::2
+Branch(config)# exit
+
+
+
+
+
+
+
+
