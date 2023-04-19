@@ -1,0 +1,5 @@
+Scan in verbose mode (-v), enable OS detection, version detection, script scanning, and traceroute (-A), with version detection (-sV) against the target IP (192.168.1.1):
+
+
+root@kali:~# nmap -v -A -sV 192.168.0.0/24
+root@kali:~# nmap -T4 -A -sV 192.168.1.1
