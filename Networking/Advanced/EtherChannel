@@ -1,0 +1,49 @@
+
+Configuring EtherChannels
+Configure the port channel interfaces as static trunks. Disable DTP negotiation on all trunks.
+
+L3-SW1(config)# interface range g1/0/1-2
+L3-SW1(config-if-range)# channel-group 1 mode active
+L3-SW1(config-if-range)# exit
+L3-SW1(config)#
+L3-SW1(config)# interface range g1/0/3-4
+L3-SW1(config-if-range)# channel-group 2 mode active
+L3-SW1(config-if-range)# exit
+
+
+L3-SW1(config)# interface port-channel 1
+L3-SW1(config-if)# switchport mode trunk
+L3-SW1(config-if)# switchport trunk allowed vlan 10,20,30
+L3-SW1(config-if)# exit
+L3-SW1(config)#
+L3-SW1(config)# interface port-channel 2
+L3-SW1(config-if)# switchport mode trunk
+L3-SW1(config-if)# switchport trunk allowed vlan 10,20,30
+L3-SW1(config-if)# exit
+
+
+Sw-A(config)# interface port-channel 1
+Sw-A(config-if)# switchport mode trunk 
+Sw-A(config-if)# switchport nonegotiate												Disable DTP negotiation on all trunks
+Sw-A(config-if)# exit
+Sw-A(config)#
+Sw-A(config)# interface port-channel 3
+Sw-A(config-if)# switchport mode trunk 
+Sw-A(config-if)# switchport nonegotiate												Disable DTP negotiation on all trunks
+Sw-A(config-if)# exit
+
+
+
+
+
+
+REASON FOR DISABLING DTP
+Caution:
+Some internetworking devices might forward DTP frames improperly, which can cause misconfigurations. To avoid this, turn off DTP on Cisco switch interfaces that are connected to devices that do not support DTP.
+
+S1(config-if)# switchport mode trunk
+S1(config-if)# switchport nonegotiate
+
+To re-enable dynamic trunking protocol use the switchport mode dynamic auto command.
+
+S1(config-if)# switchport mode dynamic auto
