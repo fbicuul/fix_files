@@ -1,0 +1,7 @@
+
+THE DISTANCE VECTOR	-	Router RIP (used for smaller network)
+Branch(config)# router	rip
+Branch(config)# network 192.168.1.0		255.255.255.0
+Branch(config)# network 192.168.2.0		255.255.255.0
+Branch(config)# network 192.168.3.0		255.255.255.0
+
