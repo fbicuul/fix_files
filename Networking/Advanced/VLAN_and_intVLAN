@@ -1,0 +1,124 @@
+CREATING VLAN
+Router (config)# vlan 10
+Router (config-vlan)# name Admin
+Router (config-vlan)# exit
+Router (config)#
+Router (config)# int range f0/1-24, g0/1-2
+Router (config-if)#switchport mode access
+Router (config-if)#switchport access vlan 10
+
+
+
+
+TO MAKE A PORT NATIVE
+Router (config)# vlan 20
+Router (config-vlan)# name Native
+Router (config-vlan)# exit
+Router (config)#
+Router (config)# int range g0/1-2
+Router (config-if)#switchport mode trunk
+Router (config-if)#switchport trunk native vlan 20
+
+
+
+
+ROUTER-ON-A-STICK SUB-INTERFACE FOR VLANS
+Router (config)# int g0/0/1.40
+Router (config-subif)# description "Gateway for VLAN40"
+Router (config-subif)# encapsulation dot1q  40
+Router (config-subif)# ip address 192.168.40.1  255.255.255.0
+Router (config-subif)# exit
+Router (config-if)# int  g0/0/1.50
+Router (config-subif)# description "Gateway for VLAN50"
+Router (config-subif)# encapsulation dot1q  40
+Router (config-subif)# ip address 192.168.50.1  255.255.255.0
+Router (config-subif)# exit
+Router (config)#
+Router (config)# int  g0/0/1
+Router (config-if)# no  sh
+Router (config-if)# do copy run start
+
+
+
+
+ON A LAYER 3 SWITCH, YOU DO NOT CONFIGURE SUB-INTERFACES FOR VLANS
+You configure the vlans just as it is done on a layer 2 switch, followed with  the SVI of the vlans
+
+Router (config)# vlan 20
+Router (config-vlan)# name Trainee
+Router (config-vlan)# exit
+Router (config-if)# interface vlan 20
+Router (config-if)# description Trainee
+Router (config-if)# ip address 192.168.99.2 255.255.255.240
+Router (config-if)# exit
+Router (config)#
+Router (config)#ip routing
+
+LAYER 3 SWITCH PORT ROUTABLE																
+D1(config)# ip routing																									
+D1(config)# interface GigabitEthernet0/0/1													
+D1(config-if)# description routed Port Link to R1											
+D1(config-if)# no switchport																					
+D1(config-if)# ip address 10.10.10.2 255.255.255.0										
+D1(config-if)# no shut																									
+D1(config-if)# exit																											
+D1(config)#																														
+
+
+
+
+
+
+
+
+VOICE VLAN
+S3(config)# vlan 20
+S3(config-vlan)# name student
+S3(config-vlan)# vlan 150
+S3(config-vlan)# name VOICE
+S3(config-vlan)# exit
+S3(config)# interface fa0/18
+S3(config-if)# switchport mode access
+S3(config-if)# switchport access vlan 20
+S3(config-if)# mls qos trust cos
+S3(config-if)# switchport voice vlan 150
+S3(config-if)# end
+S3#
+
+
+
+
+
+DELETING VLAN
+The no vlan vlan-id global configuration mode command is used to remove a VLAN from the switch vlan.dat file.
+
+Caution:
+Before deleting a VLAN, reassign all member ports to a different VLAN  first. Any ports that are not moved to an active VLAN are unable to  communicate with other hosts after the VLAN is deleted and until they  are assigned to an active VLAN.
+The entire vlan.dat file can be deleted using the delete flash:vlan.dat privileged EXEC mode command. The abbreviated command version (delete vlan.dat)  can be used if the vlan.dat file has not been moved from its default  location. After issuing this command and reloading the switch, any  previously configured VLANs are no longer present. This effectively  places the switch into its factory default condition with regard to VLAN  configurations.
+
+Note: 
+To restore a Catalyst  switch to its factory default condition, unplug all cables except the  console and power cable from the switch. Then enter the erase startup-config privileged EXEC mode  command followed by the delete vlan.dat command.
+
+
+
+
+
+
+
+Reseting the Trunk to the Default State
+S1(config)# interface fa0/1
+S1(config-if)# no switchport trunk allowed vlan
+S1(config-if)# no switchport trunk native vlan
+S1(config-if)# end
+
+
+
+
+
+
+
+
+
+
+
+
