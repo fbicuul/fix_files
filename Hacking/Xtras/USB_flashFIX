@@ -1,0 +1,1 @@
+CommandPrompt > attrib -h -r -s /s /d F: *.* 				////display files hidden by a malware attack on a flash
