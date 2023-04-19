@@ -1,0 +1,25 @@
+SAVING CONFIGURATION
+Router (config)# do copy run start				do write
+
+
+
+Router # copy run tftp
+Address/host name??? 192.168.1.5									Ip address of the server
+Destination filename [Router-conf]??? MyFile			Name of the saved file
+
+
+
+Router # copy tftp startup-config
+Address/host name??? 192.168.1.5									Ip address of the server
+Source filename??? MyFile													The saved file
+Destination filename [Router-conf]??? 							leave destination name empty
+
+
+
+Router # copy tftp: flash:														to copy the IOS Image into a flash
+
+
+
+
+
+
