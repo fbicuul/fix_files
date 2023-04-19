@@ -1,0 +1,12 @@
+<!doctype html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>STP & PortFAST BpduGuard</title>
+  <meta name="generator" content="CherryTree">
+  <link rel="stylesheet" href="res/styles4.css" type="text/css" />
+</head>
+<body>
+<div class='page'><h1 class='title'>STP & PortFAST BpduGuard</h1><br/><p></p><p></p><p></p><p></p><p></p><p><strong><span style="color:#060f94;">REASON FOR THE PORT-FAST COMMAND</span></strong></p><p>When a switch port is configured with PortFast, that port transitions from blocking to forwarding state immediately, bypassing the usual 802.1D STP transition states (the listening and learning states) and avoiding a 30 second delay. You can use PortFast on access ports to allow devices connected to these ports, such as DHCP clients, to access the network immediately, rather than waiting for IEEE 802.1D STP to converge on each VLAN. Because the purpose of PortFast is to minimize the time that access ports must wait for spanning tree to converge, it should only be used on access ports. If you enable PortFast on a port connecting to another switch, you risk creating a spanning tree loop. <span style="color:#060f94;">PortFast is only for use on switch ports that connect to end devices.</span></p><p></p><p></p><p></p><p></p><p><span style="color:#f66151;">Switch(config)#</span> spanning-tree portfast bpduguard default<span style="color:#57e389;">      		for the global config mode </span></p><p><span style="color:#f66151;">Switch(config)#</span> spanning-tree bpduguard enable <span style="color:#57e389;"> 								for the interface</span></p><p></p><p><span style="color:#f66151;">Switch(config)#</span> spanning-tree portfast default <span style="color:#57e389;"> 									for the global config mode </span></p><p><span style="color:#f66151;">Switch(config)#</span> spanning-tree portfast <span style="color:#57e389;"> 													for the interface</span></p><p></p></div>
+</body>
+</html>
