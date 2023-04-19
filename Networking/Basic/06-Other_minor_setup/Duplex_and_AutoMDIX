@@ -1,0 +1,22 @@
+
+FULL DUPLEX
+When connecting to known devices such as servers, dedicated workstations, or network devices, a best practice is to manually set the speed and duplex settings.
+
+
+All fiber-optic ports, such as 1000BASE-SX ports, operate only at one preset speed and are always full-duplex.
+
+
+
+S1(config)# interface FastEthernet 0/1
+S1(config-if)# duplex full
+S1(config-if)# speed 100
+S1(config-if)# end
+S1# copy run  start
+
+
+NOTE:
+With auto-MDIX enabled, either type of cable can be used to connect to other devices, and the interface automatically adjusts to communicate successfully. On newer Cisco switches, the mdix auto interface configuration mode command enables the feature. When using auto-MDIX on an interface, the interface speed and duplex must be set to auto so that the feature operates correctly.
+
+
+
+
