@@ -1,0 +1,11 @@
+ CREATING A VIRTUAL NETWORK (ROUGUE ACCESS POINT)
+
+netsh wlan set hostednetwork mode=allow
+netsh wlan set hostednetwork ssid=NetLab
+netsh wlan start hostednetwork key=NetLab12345 keyusage=temporary 		(or persistent)
+netsh wlan start hostednetwork
+netsh wlan stop hostednetwork
+
+
+ 
+  
