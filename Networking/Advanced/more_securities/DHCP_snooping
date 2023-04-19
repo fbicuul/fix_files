@@ -1,0 +1,13 @@
+
+S1-1(config)#ip dhcp snooping 
+S1-1(config)#ip dhcp snooping vlan 5,10,50,999
+S1-1(config)#interface range f0/1-5, g0/1
+S1-1(config-if-range)#ip dhcp snooping limit rate 6
+S1-1(config-if-range)#exit
+S1-1(config)#interface g0/1
+S1-1(config-if)#ip dhcp snooping trust
+S1-1(config-if)#exit
+
+
+
+S1# show ip dhcp snooping
