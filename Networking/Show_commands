@@ -1,0 +1,97 @@
+S1# show arp 
+
+S1# show flash
+
+S1# show interfaces
+
+S1# show ip(ipv6) int brief
+
+S1# show protocols
+
+S1# show users
+
+S1# show version
+
+S1# show mac-address-table   										////displays the MAC Address table
+
+S1# show run    																			////to verify a switch has been configured
+
+S1# show vlan [brief]
+
+S1# show startup-config   													////to erase, "S1#erase startup-config"
+
+S1# show vlan summary
+
+S1# show int switchport
+
+S1# show int trunk
+
+S1# show interfaces | include gig|802.1Q
+
+S1# show running-config interface fa0/6
+
+S1# show int fa0/6 switchport
+
+S1# show running-config interface g0/0/1.10
+
+S1# show interfaces port-channel 1
+
+S1# show etherchannel summary
+
+S1# show etherchannel port-channel
+
+S1# show interfaces f0/1 etherchannel
+
+S1# show run | begin interface port-channel
+
+S1# show running-config | section dhcp
+
+S1# show ip dhcp binding
+
+S1# show ip dhcp server statistics
+
+S1# show ipv6 dhcp pool 
+
+S1# show running-config | section vlan
+
+S1# show cdp neighbors
+
+S1# show controllers ethernet-controller fa0/1 phy | include MDIX
+
+S1# show history
+
+S1# show dtp interface fa0/1
+
+S1# show port-security interface f0/1
+
+S1# show port-security address
+
+S1# show ip dhcp snooping
+
+S1# show running-config | begin span
+
+S1# show ip route static
+
+S1# show ip route    																////view the routes for all IP
+
+S1# show ip ospf database
+
+S1# show ip ospf neighbor
+
+S1# show ip protocols
+
+S1# show ip ospf interface GigabitEthernet 0/0/0
+
+S1# show access-lists
+
+
+
+
+
+
+
+
+
+
+
+
