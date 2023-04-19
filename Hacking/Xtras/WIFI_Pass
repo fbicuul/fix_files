@@ -1,0 +1,3 @@
+(from within)
+CommandPrompt > netsh wlan show profile/driver/networks						////display profiles, drivers, networks
+CommandPrompt > netsh wlan show profile networking_lab key=clear ////display network password
