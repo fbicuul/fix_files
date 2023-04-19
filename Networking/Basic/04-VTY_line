@@ -1,0 +1,13 @@
+ VIRTUAL LINE CONFIGURATION
+ 
+ S1(config)# vty line 0 15        														////or vty line 0 4 (for routers)
+ S1(config-line) # transport input ssh
+ S1(config-line) # login local
+ S1(config-line) # exec-timeout 5
+ S1(config-line) # description Virtual Line Secured
+ S1(config-line) # exit
+ S1(config)# ip ssh version 2
+ S1(config) # ip default-gateway 192.168.10.1
+ 
+ 
+ CommandPrompt > ssh -L username 192.168.10.1    //// (telnet 192.168.10.1) remote access to R1 or S1  
