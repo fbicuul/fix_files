@@ -1,0 +1,34 @@
+Switch# clock set 15:00:00 31 Jan 2022
+
+
+Advanced ////
+NTP SERVER - master clock (network time protocol) 
+USING A SERVER
+when a router is connected to a server;
+
+Router (config)# ntp server 192.168.1.5					using the ip add of the server
+Router (config)# do sh ntp association 					or use asso / associat
+Router (config)# do sh clock
+
+
+
+USING A ROUTER
+IN THE MASTER ROUTER 1 //////
+Router (config)# clock set 15:00:00  31 Jan 2022
+Router (config)# ntp master 1
+
+
+Goto Router 2 ///////////
+Router (config)# ntp server 10.10.10.1 				router one's ip address and repeat same in other router
+Router (config)# do sh ntp status
+Router (config)# do sh clock
+
+
+Goto Router 3 ///////////
+Router (config)# ntp server 10.10.10.1 				router one's ip address and repeat same in other router
+Router (config)# do sh ntp status
+Router (config)# do sh clock
+Router (config)# do sh ntp associations
+
+
+
