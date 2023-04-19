@@ -1,0 +1,22 @@
+SECURING THE ENTREANCE
+
+Switch(config)# hostname S1
+S1(config)# enable secret 1234567
+
+
+
+CONSOLE LINE CONFIGURATION
+
+S1(config)# line console 0
+S1(config-line) # password 1234567
+S1(config-line) # login
+S1(config-line) # exec-timeout 5
+S1(config-line) # description Console Line Secured
+S1(config-line) # exit
+S1# copy run start    																		////or write
+S1# copy start flash    																	////backup storage space
+
+
+
+
+
