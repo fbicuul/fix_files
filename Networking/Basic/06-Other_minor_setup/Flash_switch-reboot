@@ -1,0 +1,15 @@
+STEPS
+Hold the little button on the switch and plug in the power cord till it loads on the hyper terminal
+
+Switch: flash_init
+Switch: dir flash:
+Switch: rename flash:config.text  flash:config.old
+Switch: boot
+Switch: rename flash:config.old  flash:config.text 
+
+
+
+
+
+
+
