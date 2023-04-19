@@ -1,0 +1,164 @@
+
+Standard Numbered ACLs 
+ACLs only filter (permit or deny packets) at Layer 3, based only on the source IPv4 address.
+
+
+
+Assume only PC1 is allowed out to the internet. To enable this policy, a standard ACL ACE could be applied outbound on S0/1/0, as shown in the figure.
+
+R1(config)# access-list 10 remark ACE permits ONLY host 192.168.10.10 to the internet							
+R1(config)# access-list 10 permit host 192.168.10.10																										
+R1(config)# do show access-lists																																				
+	Standard IP access list 10																																							
+    10 permit 192.168.10.10																																								
+R1(config)#																																															
+
+
+Now assume that a new network policy states that hosts in LAN 2 should also be permitted to the internet. To enable this policy, a second standard ACL ACE could be added to ACL 10, as shown in the output.
+
+
+R1(config)# access-list 10 remark ACE permits all host in LAN 2																				
+R1(config)# access-list 10 permit 192.168.20.0 0.0.0.255																							
+R1(config)# do show access-lists																																				
+Standard IP access list 10																																								
+    10 permit 192.168.10.10																																								
+    20 permit 192.168.20.0, wildcard bits 0.0.0.255																											
+R1(config)#   																																															
+
+
+Apply ACL 10 outbound on the Serial 0/1/0 interface.
+
+
+R1(config)# interface Serial 0/1/0																																				
+R1(config-if)# ip access-group 10 out																																		
+R1(config-if)# end																																												
+R1# 																																																			
+
+
+
+The resulting policy of ACL 10 will only permit host 192.168.10.10 and all host from LAN 2 to exit the Serial 0/1/0 interface. All other hosts in the 192.168.10.0 network will not be permitted to the internet.
+
+
+R1# show  run  |  section  access-list																																		
+access-list 10 remark ACE permits host 192.168.10.10																									
+access-list 10 permit 192.168.10.10																																			
+access-list 10 remark ACE permits all host in LAN 2																										
+access-list 10 permit 192.168.20.0 0.0.0.255																													
+R1# 																																																			
+
+Notice how the remarks statements are also displayed.
+
+Finally, use the show ip interface  command to verify if an interface has an ACL applied to it. In the  example output, the output is specifically looking at the Serial 0/1/0  interface for lines that include “access list” text.
+
+
+R1# show  ip  int  Serial 0/1/0  |  include access list																											
+  Outgoing Common access list is not set																																
+  Outgoing access list is 10																																							
+  Inbound Common access list is not set																																	
+  Inbound  access list is not set																																					
+R1# 																																																			
+
+
+
+
+
+Standard Named ACLs 
+
+
+
+
+Assume  only PC1 is allowed out to the internet. To enable this policy, a named  standard ACL called PERMIT-ACCESS could be applied outbound on S0/1/0.
+
+Remove the previously configured named ACL 10 and create a named standard ACL called PERMIT-ACCESS, as shown here.
+
+R1(config)# no  access-list  10																																
+R1(config)# ip  access-list  standard  PERMIT-ACCESS																			
+R1(config-std-nacl)# remark  ACE permits host 192.168.10.10															
+R1(config-std-nacl)# permit  host  192.168.10.10																						
+R1(config-std-nacl)# 																																				
+
+
+Now add an ACE permitting only host 192.168.10.10 and another ACE permitting all LAN 2 hosts to the internet.
+
+R1(config-std-nacl)# remark ACE permits host 192.168.10.10															
+R1(config-std-nacl)# permit host 192.168.10.10																						
+R1(config-std-nacl)# remark ACE permits all hosts in LAN 2																
+R1(config-std-nacl)# permit 192.168.20.0 0.0.0.255																				
+R1(config-std-nacl)# exit																																		
+R1(config)# 																																									
+
+Apply the new named ACL outbound to the Serial 0/1/0 interface.
+
+R1(config)# interface  Serial 0/1/0																													
+R1(config-if)# ip  access-group  PERMIT-ACCESS  out																			
+R1(config-if)# end																																						
+R1# 																																													
+
+Use the show access-lists and show running-config command to review the ACL in the configuration, as shown in the output.
+
+R1# show  access-lists																																			
+	Standard IP access  list  PERMIT-ACCESS																								
+    10 permit 192.168.10.10																																		
+    20 permit 192.168.20.0, wildcard bits 0.0.0.255																					
+R1# show  run  |  section  ip  access-list																											
+	ip access-list standard PERMIT-ACCESS																									
+ 	remark ACE permits host 192.168.10.10																									
+ 	permit 192.168.10.10																																			
+ 	remark ACE permits all hosts in LAN 2																										
+ 	permit 192.168.20.0 0.0.0.255																														
+R1# 																																													
+
+Finally, use the show ip interface command to verify if an interface has an ACL applied to it. In the example output, the output is specifically looking at the Serial 0/1/0 interface for lines that include “access list” text.
+
+R1# show  ip  int  Serial 0/1/0  |  include access list																					
+  Outgoing Common access list is not set																										
+  Outgoing access list is PERMIT-ACCESS																										
+  Inbound Common access list is not set																											
+  Inbound  access list is not set																															
+R1# 																																													
+
+
+
+
+
+
+
+
+
+Secure VTY ACLs
+
+
+
+A named standard ACL called ADMIN-HOST is created and identifies PC1. Notice that the deny any has been configured to track the number of times access has been denied.
+
+The vty lines are configured to use the local database for authentication, permit Telnet traffic, and use the ADMIN-HOST ACL to restrict traffic.
+
+
+R1(config)# username ADMIN secret class
+R1(config)# ip access-list standard ADMIN-HOST
+R1(config-std-nacl)# remark This ACL secures incoming vty lines
+R1(config-std-nacl)# permit 192.168.10.10
+R1(config-std-nacl)# deny any
+R1(config-std-nacl)# exit
+R1(config)# line vty 0 4
+R1(config-line)# login local
+R1(config-line)# transport input telnet
+R1(config-line)# access-class ADMIN-HOST in
+R1(config-line)# end
+R1#
+
+In a production environment, you would set the vty lines to only allow SSH, as shown in the example.
+
+R1(config)# line vty 0 4
+R1(config-line)# login local
+R1(config-line)# transport input ssh
+R1(config-line)# access-class ADMIN-HOST in
+R1(config-line)# end
+R1#
+
+
+
+
+
+
+
