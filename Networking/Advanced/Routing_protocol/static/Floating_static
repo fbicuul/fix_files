@@ -1,0 +1,17 @@
+
+Another type of static route is a floating static route. Floating static routes are static routes that are used to provide a backup path to a primary static or dynamic route, in the event of a link failure. The floating static route is only used when the primary route is not available.
+
+
+By default, static routes have an administrative distance of 1, making them preferable to routes learned from dynamic routing protocols.
+The administrative distance of a static route can be increased to make the route less desirable than that of another static route or a route learned through a dynamic routing protocol. In this way, the static route “floats” and is not used when the route with the better administrative distance is active. However, if the preferred route is lost, the floating static route can take over, and traffic can be sent through this alternate route.
+
+
+R1(config)# ip route 			0.0.0.0 	0.0.0.0 	172.16.2.2
+R1(config)# ip route 			0.0.0.0 	0.0.0.0 	10.10.10.2 	5
+
+R1(config)# ipv6 route 	::/0 	2001:db8:acad:2::2
+R1(config)# ipv6 route 	::/0 	2001:db8:feed:10::2 	5
+
+
+
+
