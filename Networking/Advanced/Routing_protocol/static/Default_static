@@ -1,0 +1,21 @@
+
+A default route is similar to a default gateway on a host. The default route specifies a next-hop router to use when the routing table does not contain a specific route that matches the destination IP address.
+
+Most enterprise routers have a default route in their routing table. This is to reduce the number of routes in a routing table.
+
+A router, such as a home or small office router that only has one LAN, may reach all its remote networks through a default route. This is useful when the router has only directly connected networks and one exit point to a service provider router.
+
+
+R1(config)# ip route  0.0.0.0 	0.0.0.0 	172.16.2.2
+R1(config)# ipv6 route  ::/0 	2001:db8:acad:2::2
+
+
+
+
+
+
+
+
+
+
+
