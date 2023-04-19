@@ -1,0 +1,8 @@
+IPv4 Addressing
+
+S1(config)# int g0/0
+S1(config-vlan)# ip add 192.168.10.6 255.255.255.0
+S1(config-vlan)# no sh
+S1(config-vlan)# exit
+S1(config)# ip de 192.168.10.1
+S1# show ip int brief    																			////displays the summary of ipv4 interfaces
