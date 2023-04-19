@@ -1,0 +1,11 @@
+REASON FOR THE PORT-FAST COMMAND
+When a switch port is configured with PortFast, that port transitions from blocking to forwarding state immediately, bypassing the usual 802.1D STP transition states (the listening and learning states) and avoiding a 30 second delay. You can use PortFast on access ports to allow devices connected to these ports, such as DHCP clients, to access the network immediately, rather than waiting for IEEE 802.1D STP to converge on each VLAN. Because the purpose of PortFast is to minimize the time that access ports must wait for spanning tree to converge, it should only be used on access ports. If you enable PortFast on a port connecting to another switch, you risk creating a spanning tree loop. PortFast is only for use on switch ports that connect to end devices.
+
+
+
+
+Switch(config)# spanning-tree portfast bpduguard default      		for the global config mode 
+Switch(config)# spanning-tree bpduguard enable  								for the interface
+
+Switch(config)# spanning-tree portfast default  									for the global config mode 
+Switch(config)# spanning-tree portfast  													for the interface
