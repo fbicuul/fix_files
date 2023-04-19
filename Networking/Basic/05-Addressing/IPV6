@@ -1,0 +1,11 @@
+IPv6 Addressing
+
+S1(config)# ipv6 unicast-routing  																////to activate the ipv6 routing
+S1(config)# int vlan 99
+S1(config-vlan)# ipv6 add FE80::E184:8FEC:534B:9851:22 /64
+S1(config-vlan)# ipv6 add fe80::1 link-local
+S1(config-vlan)# no sh
+S1(config-vlan)# exit
+S1(config)# ip de FE80::E184:8FEC:534B:9851:1 /64
+S1# show ipv6 int brief    																					////summary of ipv6 interfaces
+S1(config)# show run int g0/0/0
