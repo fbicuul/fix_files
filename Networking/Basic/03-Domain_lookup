@@ -1,0 +1,12 @@
+DOMAIN LOOKUP
+
+S1(config)# no ip domain-lookup
+S1(config)# ip domain-name www.sample.pka
+S1(config)# username Admin privilege 15 secret Admin34@
+S1(config)# crypto key generate rsa
+How many bits in the modulus? [512]: 1024
+
+S1(config)# block-for 60 attempts 3 within 30
+S1(config)# security passwords min-length 10
+S1(config)# service password-encryption
+S1(config)# banner motd #BEWARE TO ALL HACKERS!!!#
