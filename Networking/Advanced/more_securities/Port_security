@@ -1,0 +1,47 @@
+
+CONFIGURING SWITCHPORT SECURITY
+S1(config)# interface f0/1
+S1(config-if)# switchport mode access					must make port access first
+S1(config-if)# switchport port-security					enable port security
+S1(config-if)# end
+
+
+
+S1(config-if)# switchport port-security ?
+  aging        Port-security aging commands
+  mac-address  Secure mac address
+  maximum      Max secure addresses
+  violation    Security violation mode  
+S1(config-if)# switchport port-security
+
+
+
+EXAMPLE
+S1-1(config)# interface range f0/1-5											 already made port an  access port 		
+S1-1(config-if-range)# switchport port-security
+S1-1(config-if-range)# switchport port-security maximum 4
+S1-1(config-if-range)# switchport port-security violation restrict
+S1-1(config-if-range)# switchport port-security aging time 10
+S1-1(config-if-range)# switchport port-security mac-address sticky
+S1-1(config-if-range)# exit
+
+S1-1(config)# interface f0/1
+S1-1(config-if)# switchport port-security mac-address 00D0.D3DC.2825
+S1-1(config-if)# exit
+
+
+
+
+Port security aging can be used to set the aging time for static and  dynamic secure addresses on a port. Two types of aging are supported per  port:
+
+• Absolute - The secure addresses on the port are deleted after the specified aging time.
+• Inactivity - The secure addresses on the port are deleted only if they are inactive for the specified aging time.
+
+S1(config-if)# switchport port-security aging time 10 
+S1(config-if)# switchport port-security aging type inactivity 
+
+
+
+
+
+
